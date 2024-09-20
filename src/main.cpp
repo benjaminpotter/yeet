@@ -1,6 +1,6 @@
 
-#include "yeet/application.h"
 #include <iostream>
+#include "yeet/application.h"
 
 int main(int argc, char *argv[]) 
 {

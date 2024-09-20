@@ -1,7 +1,7 @@
 
-#include "yeet/application.h"
 #include <math.h>
 #include <vector>
+#include "yeet/application.h"
 #include "yeet/window.h"
 
 Application::Application() :
