@@ -1,16 +1,11 @@
 
+#include "yeet/application.h"
 #include <iostream>
-
-typedef struct SimulationParameters {
-
-
-
-} SimulationParameters;
-
 
 int main(int argc, char *argv[]) 
 {
-    std::cout << "Hello, world!" << std::endl;
+    Application app;
+    app.start();
     
     return 0;
 }
