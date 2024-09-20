@@ -30,6 +30,8 @@ void Window::update()
     DrawLineV((Vector2){75, 100}, (Vector2){75, 300}, BLACK);
     DrawLineV((Vector2){50, 200}, (Vector2){800, 200}, BLACK);
 
+    DrawText(TextFormat("Sim Time: %0.2fs", GetTime()), 50, 400, 16, BLACK);
+
     EndDrawing();
 }
 

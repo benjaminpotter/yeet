@@ -15,7 +15,15 @@ Application::Application() :
 
 	mesh[i].e = 0.0;
 	mesh[i].h = 0.0;
+
+	mesh[i].ep = 1.0;
+	mesh[i].mu = 1.0;
     }
+
+    // Indicate source.
+    mesh[0].e = 1.0;
+    mesh[1].e = 1.0;
+    mesh[2].e = 1.0;
 }
 
 void Application::start() 
@@ -25,18 +33,26 @@ void Application::start()
     const double b = 1.0;
     const double w = 1.0;
 
-    double t = 0.0; // in ms
     while(!window.should_close()) 
     {
-	for(int i = 0; i < mesh.size(); ++i)
+	for(int i = 1; i < mesh.size()-1; ++i)
 	{
-	    double x = (double) i * 2.0 * 3.14159265 / (double) mesh.size();
-	    double dt = GetFrameTime();
+	    double dt = GetFrameTime(); 
 
-	    t += dt; 
+	    // dH/dt = 1/mu * dE/dx
+	    // dE/dt = 1/ep * dH/dx
+	    
+	    double h0 = mesh[i-1].h;
+	    double h1 = mesh[i+1].h;
 
-	    mesh[i].e = sin(b*x + w*t/1000.0);
-	    mesh[i].h = cos(b*x + w*t/1000.0);
+	    double e0 = mesh[i-1].e;
+	    double e1 = mesh[i+1].e;
+
+	    double dhdx = (h1 - h0) / 2.0;
+	    double dedx = (e1 - e0) / 2.0;
+
+	    mesh[i].e += mesh[i].ep * dhdx * dt;
+	    mesh[i].h += mesh[i].mu * dedx * dt; 
 	}	
 
 	window.update_mesh(mesh);
