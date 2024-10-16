@@ -21,7 +21,7 @@ public:
     Mesh() = default;
     virtual ~Mesh() = default;
 
-    void init();
+    void init(int max_steps);
     void step();
 
     inline const std::vector<MeshNode> &get_mesh() { return mesh; }
@@ -31,8 +31,10 @@ private:
     double dt;
     double dx; 
 
+    double imp0;
     double mesh_constant;
 
+    int max_steps;
     int step_count;
 
     std::vector<MeshNode> mesh;

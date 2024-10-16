@@ -9,7 +9,7 @@ namespace yeet {
 void Application::start() 
 {
     window.start();
-    mesh.init();
+    mesh.init(2000);
 
     bool play = false;
     while(!window.should_close()) 
