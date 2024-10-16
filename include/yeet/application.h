@@ -1,14 +1,14 @@
 
-#include "mesh.h"
-#include <vector>
 #include "yeet/window.h"
 
 #pragma once
 
+namespace yeet {
+
 class Application {
 
 public:
-    Application();
+    Application() = default;
     virtual ~Application() = default;
 
     void start();
@@ -16,6 +16,8 @@ public:
 private:
 
     Window window;
-    std::vector<MeshNode> mesh;
+    Mesh mesh;
 };
+
+}
 

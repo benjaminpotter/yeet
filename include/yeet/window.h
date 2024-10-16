@@ -4,6 +4,8 @@
 
 #pragma once
 
+namespace yeet {
+
 class Window {
 
 public:
@@ -14,7 +16,8 @@ public:
 
     void start();
     void update();
-    void update_mesh(const std::vector<MeshNode> &mesh);
+
+    inline void update_mesh(const std::vector<MeshNode> &mesh) { this->mesh = mesh; }
 
 private:
 
@@ -28,3 +31,6 @@ private:
     std::vector<MeshNode> mesh;
 
 };
+
+}
+

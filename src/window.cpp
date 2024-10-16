@@ -3,6 +3,7 @@
 #include <vector>
 #include "yeet/window.h"
 
+namespace yeet {
 
 Window::~Window() 
 {
@@ -22,7 +23,7 @@ void Window::update()
     int step_width_pixels = 5;	
     for(int i = 0; i < mesh.size(); ++i)
     {
-	Vector2 anchor = { i * 5 + 100, 200 };
+	Vector2 anchor = { i * 1.0 + 100, 200 };
 	draw_field(mesh[i].e, (Vector2){anchor.x,anchor.y}, e_col);
 	draw_field(mesh[i].h, (Vector2){anchor.x,anchor.y}, h_col);
     }
@@ -30,27 +31,26 @@ void Window::update()
     DrawLineV((Vector2){75, 100}, (Vector2){75, 300}, BLACK);
     DrawLineV((Vector2){50, 200}, (Vector2){800, 200}, BLACK);
 
-    DrawText(TextFormat("Sim Time: %0.2fs", GetTime()), 50, 400, 16, BLACK);
+    DrawText("E Field = Red", 50, 350, 10, BLACK);
+    DrawText("H Field = Blue", 50, 370, 10, BLACK);
+    // DrawText(TextFormat("Sim Time = %f", 0.0), 50, 400, 10, BLACK);
 
     EndDrawing();
 }
 
-void Window::update_mesh(const std::vector<MeshNode> &mesh)
-{
-    this->mesh = mesh;
-}
-
 void Window::draw_field(double amplitude, Vector2 anchor, Color col)
 {
-    double height = amplitude * 200.0;
+    double height = amplitude * 100.0;
     
     Rectangle rect;
     if(height > 0) {
-	rect = { anchor.x, anchor.y - height, 5, height };
+	rect = { anchor.x, anchor.y - height, 1, height };
     } else {
-	rect = { anchor.x, anchor.y, 5, -height };
+	rect = { anchor.x, anchor.y, 1, -height };
     }
 
     DrawRectangleRec(rect, col);
+}
+
 }
 

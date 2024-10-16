@@ -4,7 +4,7 @@
 
 int main(int argc, char *argv[]) 
 {
-    Application app;
+    yeet::Application app;
     app.start();
     
     return 0;

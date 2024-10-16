@@ -9,7 +9,7 @@ project(
 
 find_package(raylib QUIET)
 
-set(SOURCES src/application.cpp src/main.cpp src/window.cpp)
+set(SOURCES src/application.cpp src/main.cpp src/mesh.cpp src/window.cpp)
 add_executable(${PROJECT_NAME} ${SOURCES})
 set_target_properties(${PROJECT_NAME} PROPERTIES CXX_STANDARD 11)
 target_include_directories(${PROJECT_NAME} PUBLIC include)
