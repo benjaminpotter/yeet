@@ -15,11 +15,21 @@ void Mesh::init(int max_steps)
 
     imp0 = 377.0;
 
+    // n = sqrt( mu_r * ep_r )
+    // 
+
     // Initialize the mesh.	
     for(int i = 0; i < mesh.size(); ++i)
     {
 	mesh[i].e = 0.0;
 	mesh[i].h = 0.0;
+
+	mesh[i].rec_mu = 1.0;
+	mesh[i].rec_ep = 1.0;
+
+	if(i > mesh.size()/2) {
+	    mesh[i].rec_ep = 1.0 / (1.5 * 1.5); // ep = n^2
+	}
     }
 }
 
@@ -40,6 +50,9 @@ void Mesh::step()
     // H' = H + 1/mu * dE * mesh_constant
     // E' = E + 1/ep * dH * mesh_constant
 
+    // Apply ABC.
+    mesh[mesh.size()-1].h = mesh[mesh.size()-2].h;
+
     // Update H.
     for(int i = 0; i < mesh.size()-1; ++i)
     {
@@ -48,8 +61,11 @@ void Mesh::step()
 
 	double dE = (e1 - e0);
 
-	mesh[i].h += dE / imp0;
+	mesh[i].h += dE / imp0 * mesh[i].rec_mu;
     }	
+
+    // Apply ABC.
+    mesh[0].e = mesh[1].e;
 
     // Update E.
     for(int i = 1; i < mesh.size(); ++i)
@@ -59,7 +75,7 @@ void Mesh::step()
 
 	double dH = (h1 - h0);
 
-	mesh[i].e += dH * imp0; 
+	mesh[i].e += dH * imp0 * mesh[i].rec_ep; 
     }	
 
     // Additive gaussian source at node 50.
