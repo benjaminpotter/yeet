@@ -19,11 +19,12 @@ On Linux and MacOS:
 $> git clone https://github.com/benjaminpotter/yeet.git
 $> cd yeet
 $> mkdir build
-$> cmake -C build .
+$> cmake -B build .
 $> make -C build
 ```
 
 ### Prerequisites
+- cmake
 - c++11
 - raylib
 
