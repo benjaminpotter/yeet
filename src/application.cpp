@@ -56,6 +56,7 @@ void Application::start()
 		std::stringstream ss;
 		for(auto node : mesh.get_mesh()) {
 		    ss << node.e << ",";
+		}
 		
 		std::string line = ss.str();
 		line.pop_back();
